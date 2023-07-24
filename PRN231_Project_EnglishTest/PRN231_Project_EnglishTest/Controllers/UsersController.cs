@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PRN231_Project_EnglishTest.DTO;
+using PRN231_Project_EnglishTest.DTO.SignUp;
 using PRN231_Project_EnglishTest.Models;
 
 namespace PRN231_Project_EnglishTest.Controllers
@@ -66,6 +67,12 @@ namespace PRN231_Project_EnglishTest.Controllers
         {
             try
             {
+                if (context.Users
+                    .FirstOrDefault(x => x.Username.Equals(signUpDto.Username) || x.Email.Equals(signUpDto.Email)) != null)
+                {
+                    return BadRequest();
+                }
+
                 var user = mapper.Map<User>(signUpDto);
                 context.Add(user);
                 context.SaveChanges();
@@ -74,7 +81,7 @@ namespace PRN231_Project_EnglishTest.Controllers
             catch (Exception)
             {
 
-                throw;
+                return BadRequest();
             }
         }
     }

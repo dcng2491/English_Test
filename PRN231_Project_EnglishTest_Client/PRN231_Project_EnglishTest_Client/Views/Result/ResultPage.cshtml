@@ -27,20 +27,10 @@
                     <th scope="row">Review:</th>
                     <td>
                         <!-- Thêm nút Review và đặt ID cho nút để thực hiện hành động từ JavaScript -->
-                        <button id="btnReview" class="btn btn-primary">Review</button>
+                        <a asp-action="Index" asp-controller="ResultDetail" asp-route-resultid="@res.ResultId" asp-route-userid="@res.UserId" id="btnReview" class="btn btn-primary">Review</a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-
-    <script>
-        var resultid = (new URL(document.location)).searchParams.get("resultid");
-        // Bắt sự kiện click trên nút "Review"
-        document.getElementById('btnReview').addEventListener('click', function () {
-            // Thực hiện hành động Review ở đây
-            // Ví dụ: Chuyển hướng đến trang review
-            window.location.href = "/ResultDetail?resultid=" + resultid;
-        });
-    </script>
 }

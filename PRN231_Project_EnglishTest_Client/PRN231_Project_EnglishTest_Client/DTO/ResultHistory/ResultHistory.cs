@@ -1,4 +1,4 @@
-﻿namespace PRN231_Project_EnglishTest.DTO.ResultHistory
+﻿namespace PRN231_Project_EnglishTest_Client.DTO.ResultHistory
 {
     public class ResultHistory
     {

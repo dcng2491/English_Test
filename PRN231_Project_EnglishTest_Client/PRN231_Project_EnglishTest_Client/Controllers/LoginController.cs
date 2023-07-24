@@ -45,10 +45,16 @@ namespace PRN231_Project_EnglishTest_Client.Controllers
                     else
                     {
                         TempData["login"] = "Login fail pls try again!";
+                        return RedirectToAction("Index");
                     }
                 }
-                return RedirectToAction("Index", "Home");
             }
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
         }
     }
 }

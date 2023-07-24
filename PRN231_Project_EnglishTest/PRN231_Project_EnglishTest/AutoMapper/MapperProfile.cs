@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PRN231_Project_EnglishTest.Dto;
 using PRN231_Project_EnglishTest.DTO;
+using PRN231_Project_EnglishTest.DTO.SignUp;
 using PRN231_Project_EnglishTest.Models;
 using System.IO;
 
@@ -10,6 +11,7 @@ namespace PRN231_Project_EnglishTest.AutoMapper
     {
         public MapperProfile()
         {
+            UserMap();
             ResultMap();
             TestMap();
             ResultDetailMap();
@@ -34,7 +36,8 @@ namespace PRN231_Project_EnglishTest.AutoMapper
 
         public void UserMap()
         {
-            CreateMap<SignUpDto, User>();
+            CreateMap<SignUpDto, User>()
+                .ForMember(des => des.RoleId, src => src.MapFrom(x => 3));
         }
 
         public void QuestionsMap()

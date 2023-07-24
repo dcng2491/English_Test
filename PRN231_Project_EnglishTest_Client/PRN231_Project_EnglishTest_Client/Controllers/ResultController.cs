@@ -20,13 +20,27 @@ namespace PRN231_Project_EnglishTest_Client.Controllers
                         {
                             string result1 = await content.ReadAsStringAsync();
                             Result result = JsonConvert.DeserializeObject<Result>(result1);
-                            ViewBag.Result = result;
-                            return View();
+                            var usersession = HttpContext.Session.GetString("Userid") == null ? "0" : HttpContext.Session.GetString("Userid");
+
+                            if (result == null)
+                            {
+                                return RedirectToAction("Error", "Home");
+                            }
+                            else
+                            {
+                                if (!result.UserId.ToString().Equals(usersession))
+                                {
+                                    return RedirectToAction("Error", "Home");
+                                }
+
+                                ViewBag.Result = result;
+                                return View();
+                            }
                         }
                     }
                     else
                     {
-                        return View();
+                        return RedirectToAction("Error", "Home");
                     }
                 }
             }

@@ -7,8 +7,14 @@ namespace PRN231_Project_EnglishTest_Client.Controllers
 {
     public class ResultDetailController : Controller
     {
-        public async Task<IActionResult> IndexAsync(int? resultid)
+        public async Task<IActionResult> IndexAsync(int? resultid, int userid)
         {
+            var role = HttpContext.Session.GetString("Role") == null ? "0" : HttpContext.Session.GetString("Role");
+            var usersession = HttpContext.Session.GetString("Userid") == null ? "0" : HttpContext.Session.GetString("Userid");
+            if ((!role.Equals("1") && !usersession.Equals(userid.ToString())) || usersession.Equals("0"))
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             string link = "http://localhost:5166/api/ResultDetail/ResultDetailById/" + resultid;
             using (HttpClient client = new HttpClient())
@@ -28,7 +34,7 @@ namespace PRN231_Project_EnglishTest_Client.Controllers
                     }
                     else
                     {
-                        return View();
+                        return RedirectToAction("Error", "Home");
                     }
                 }
             }

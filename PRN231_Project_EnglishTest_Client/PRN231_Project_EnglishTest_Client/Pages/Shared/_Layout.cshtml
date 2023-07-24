@@ -19,7 +19,7 @@
                 @if (Context.Session.GetString("Username") != null)
                 {
                     <div class="ms-auto">
-                        <a class="nav-link" asp-controller="Login" asp-action="Logout">(@Context.Session.GetString("Username"))Logout</a>
+                        <a class="nav-link" asp-controller="Login" asp-action="Logout">(@Context.Session.GetString("Username")) Logout</a>
                     </div>
                 }
                 else
@@ -32,24 +32,23 @@
         </nav>
     </header>
     <div class="container ">
-        
-        <div class="row">
-            @*@if (Context.Session.GetString("Username") != null)
-            {*@
-                <div class="col-md-2">
-                    <div>
-                        <a class="nav-link"  asp-controller="Home" asp-action="Index">Home</a>
-                        <a class="nav-link"  asp-controller="User" asp-action="Index">Profile</a>
-                        @if (("1").Equals(Context.Session.GetString("Role")))
-                        {
-                            <a class="nav-link ml-0"  asp-controller="Publisher" asp-action="Index">Publishers</a>
-                            <a class="nav-link ml-0" asp-controller="Book" asp-action="Index">Books</a>
-                            <a class="nav-link ml-0" asp-controller="Author" asp-action="Index">Authors</a>
-                        }
-                    </div>
-                </div>
 
-            @*}*@
+        <div class="row">
+            <div class="col-md-2">
+                <div>
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                    @if (("1").Equals(Context.Session.GetString("Role")))
+                    {
+                        <a class="nav-link" asp-controller="ResultHistory" asp-action="Index" asp-route-userid="@int.Parse(Context.Session.GetString("Userid"))">Results History</a>
+                        <a class="nav-link" asp-controller="HistoryAdmin" asp-action="Index">Users's Exam History</a>
+                    }
+
+                    @if (("3").Equals(Context.Session.GetString("Role")))
+                    {
+                        <a class="nav-link" asp-controller="ResultHistory" asp-action="Index" asp-route-userid="@int.Parse(Context.Session.GetString("Userid"))">Results History</a>
+                    }
+                </div>
+            </div>
             <div class="col-md-9">
                 <main role="main" class="pb-3">
                     @RenderSection("content", required: false)

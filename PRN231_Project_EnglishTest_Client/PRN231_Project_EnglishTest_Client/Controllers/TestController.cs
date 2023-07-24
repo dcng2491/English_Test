@@ -28,7 +28,7 @@ namespace PRN231_Project_EnglishTest_Client.Controllers
                     }
                     else
                     {
-                        return View();
+                        return RedirectToAction("Error", "Home");
                     }
                 }
             }
